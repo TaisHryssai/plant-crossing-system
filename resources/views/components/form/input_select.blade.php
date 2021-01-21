@@ -5,7 +5,7 @@
     <select class="form-control custom-select @if ($required) required @endif"
             @if ($required) required="required" @endif
             autofocus="autofocus" name="{{ $field }}[]"
-            id="{{ $model }}_{{ $field }}" multiple="">
+            id="{{ $model }}_{{ $field }}" {{ $multiple ?? '' }} >
 
         <option value=''> {{$default ?? ''}} </option>
         @if(!empty($options))

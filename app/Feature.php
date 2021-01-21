@@ -27,6 +27,6 @@ class Feature extends Model
     */
     public function plants()
     {
-        return $this->belongsToMany('App\Plant', 'plant_feature', 'plant_id', 'feature_id');
+        return $this->belongsToMany('App\Plant', 'plant_features', 'plant_id', 'feature_id');
     }
 }

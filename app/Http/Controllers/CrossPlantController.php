@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Plant;
-use App\PlantFeature;
-use Illuminate\Support\Facades\Validator;
 use App\Feature;
-use App\Allele;
+use Illuminate\Support\Facades\Validator;
 
-class PlantFeatureController extends Controller
+class CrossPlantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +16,8 @@ class PlantFeatureController extends Controller
      */
     public function index()
     {
-        //
+        $plants = Feature::all();
+        return view('cross_plant.index', compact('plants'));
     }
 
     /**
@@ -26,12 +25,10 @@ class PlantFeatureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $plant = Plant::find($id);  
-        $features = Feature::all();
-        $alleles = Allele::all();
-        return view('plants.features.new', compact('plant', 'features', 'alleles'));
+        $plants = Plant::all();
+        return view('cross_plant.new', compact('plants'));
     }
 
     /**
@@ -40,36 +37,23 @@ class PlantFeatureController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            // 'plant_id'       => 'required',
-            'feature_id'       => 'required',
+            'feature_id' => 'required',
         ]);
 
-        $plant = Plant::find($id);
-        $features = Feature::all();
-        $plantFeature = new PlantFeature($data);
+        $plant = new Feature($data);
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('plants.features.new', compact('plant', 'features'))->withErrors($validator);
+            return view('features.new', compact('plant'))->withErrors($validator);
         }
 
-        foreach ($request->feature_id as $feature) {
-            $datas[] = $feature;
-        }
-
-        $p = json_encode($datas);
-
-        $plantFeature->feature_id = $p;
-        $plantFeature->plant_id = $plant->id;
-
-        $plant->features()->attach($request->feature_id);
-
-        return redirect()->route('plants.index')->with('success', 'Planta cadastrada com sucesso');
+        $plant->save();
+        return redirect()->route('plants.index')->with('success', 'Cruzamento realizado com sucesso');
     }
 
     /**
@@ -80,8 +64,7 @@ class PlantFeatureController extends Controller
      */
     public function show($id)
     {
-        $plant = Plant::find($id);
-        return view('plants.show', compact('plant'));
+        //
     }
 
     /**
@@ -92,9 +75,7 @@ class PlantFeatureController extends Controller
      */
     public function edit($id)
     {
-        $plant = Plant::find($id);
-        $features = Feature::all();
-        return view('plants.edit', compact('plant', 'features'));
+        //
     }
 
     /**
@@ -106,12 +87,7 @@ class PlantFeatureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plantFeature = PlantFeature::find($id);
-        $data = $request->all();
-
-        $validator = Validator::make($data, [
-            'feature_id'   => 'required',
-        ]);
+        //
     }
 
     /**

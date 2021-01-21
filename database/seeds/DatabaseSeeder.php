@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     	\App\User::firstOrCreate([
     		'email' => 'admin@gmail.com',
     		'name' => 'Admin',
-    		'password' => '123456'
+            'password' => Hash::make('123456'),
     	]);
     }
 }

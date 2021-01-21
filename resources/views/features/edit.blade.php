@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form action="{{route('update.feature', $allele->feature->id)}}" method="POST" novalidate>
+<form action="{{route('features.update', $allele->feature->id)}}" method="POST" novalidate>
   @csrf
   @method('patch')
 
@@ -29,7 +29,7 @@
   'required' => true,
   'errors'   => $errors]) @endcomponent
 
-  @component('components.form.input_submit', ['value' => 'Enviar', 'back_url' => route('index.feature')]) @endcomponent
+  @component('components.form.input_submit', ['value' => 'Enviar', 'back_url' => route('features.index')]) @endcomponent
 </form>
 
 @endsection

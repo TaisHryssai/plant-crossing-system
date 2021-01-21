@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
+// Route::middleware('auth:api')->get('/home', function (Request $request) {
 //     return $request->user();
 // });
+
+// Route::get('/', function () {
+// 	return view('auth.login');
+// });
+
+// Auth::routes();
+
+// Route::resource('/home', 'HomeController');
+
+// Route::resource('features', 'FeatureController');
+
+// Route::resource('plants', 'PlantController');

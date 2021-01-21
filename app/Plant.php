@@ -11,6 +11,7 @@ class Plant extends Model
     */
     protected $fillable = [
     	'name',
+        'image'
     ];
 
     /**
@@ -18,6 +19,13 @@ class Plant extends Model
     */
     public function features()
     {
-        return $this->belongsToMany('App\Feature', 'plant_feature', 'plant_id', 'feature_id');
+        return $this->belongsToMany('App\Feature', 'plant_features', 'plant_id', 'feature_id');
+    }
+
+    public function saveWithoutEvents(array $options = [])
+    {
+        return static::withoutEvents(function () use ($options) {
+            return $this->save($options);
+        });
     }
 }

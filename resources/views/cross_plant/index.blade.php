@@ -1,14 +1,15 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Plantas')
+@section('title', 'Plantas Cruzadas')
 
 @section('content')
 
-<div class="table-responsive mt-2">
-	<div class="col-sm-12 mb-5">
-		<a href="{{ route('plants.create') }}" class="btn btn-outline-primary d-block">
+<div class="table-responsive mt-8">
+	<div class="col-sm-12 mb-2">
+	</div>	<div class="col-sm-12 mb-2">
+		<a href="{{ route('crosPlant.create') }}" class="btn btn-outline-primary d-block">
 			<i class="fas fa-plus"></i>
-			Adicionar Planta
+			Cruzar Planta
 		</a>
 	</div>
 
@@ -16,13 +17,12 @@
 		<thead>
 			<tr>
 				<th>Nome da Planta</th>
-				<th>Caracteristicas</th>
+				<th>Caracteristica</th>
 				<th>Criado em</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-			@each('plants._plant_row', $plantFeature, 'plant')
 		</tbody>
 	</table>
 

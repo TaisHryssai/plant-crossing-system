@@ -17,7 +17,8 @@ class PlantController extends Controller
      */
     public function index()
     {
-        return view('plants.index');
+        $plantFeature = Plant::all();
+        return view('plants.index', compact('plantFeature'));
     }
 
     /**
@@ -63,7 +64,7 @@ class PlantController extends Controller
      */
     public function show($id)
     {
-        //
+//
     }
 
     /**

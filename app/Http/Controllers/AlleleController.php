@@ -56,7 +56,7 @@ class AlleleController extends Controller
         }
 
         $feature->alleles()->save($allele);
-        return redirect()->route('create.feature')->with('success', 'Alelo cadastrado com sucesso');
+        return redirect()->route('create.allele', $feature->id)->with('success', 'Alelo cadastrado com sucesso');
     }
 
     /**

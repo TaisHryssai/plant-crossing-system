@@ -5,24 +5,30 @@
       Administrativo
     </span>
 
-    <a class="list-group-item list-group-item-action" aria-current="page" href="">
+    <a class="list-group-item list-group-item-action" aria-current="page" href="{{ route('home') }}">
       <span class="icon mr-2">
         <i class="fas fa-home"></i>
       </span>
       Página inicial
     </a>
 
-    <a class="list-group-item list-group-item-action" href="{{route('index.feature')}}">
+    <a class="list-group-item list-group-item-action" href="{{route('features.index')}}">
       <span class="icon mr-2">
         <i class="far fa-file-alt"></i>
       </span>
       Características
     </a>
-    <a class="list-group-item list-group-item-action" href="{{route('index.plant')}}">
+    <a class="list-group-item list-group-item-action" href="{{route('plants.index')}}">
       <span class="icon mr-2">
         <i class="fas fa-seedling"></i>
       </span>
       Plantas
+    </a>
+    <a class="list-group-item list-group-item-action" href="{{ route('crosPlant.index') }}">
+      <span class="icon mr-2">
+       <i class="fas fa-plus"></i>
+      </span>
+      Cruzar Planta
     </a>
   </div>
 </div>

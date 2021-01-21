@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form action="{{route('store.feature')}}" method="POST" novalidate>
+<form action="{{route('features.store')}}" method="POST" novalidate>
   @csrf
 
   @component('components.form.input_text', ['field'    => 'name',
@@ -14,7 +14,7 @@
   'required' => true,
   'errors'   => $errors]) @endcomponent
 
-  @component('components.form.input_submit', ['value' => 'Enviar', 'back_url' => route('index.feature')]) @endcomponent
+  @component('components.form.input_submit', ['value' => 'Enviar', 'back_url' => route('features.index')]) @endcomponent
 </form>
 
 @endsection

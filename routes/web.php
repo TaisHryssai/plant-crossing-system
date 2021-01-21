@@ -21,13 +21,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/features', 'FeatureController@index')->name('index.feature');
-Route::get('/features/new', 'FeatureController@create')->name('create.feature');
-Route::post('/features/new', 'FeatureController@store')->name('store.feature');
-Route::get('/features/{id}/show', 'FeatureController@show')->name('show.feature');
-Route::get('/features/{id}/edit', 'FeatureController@edit')->name('edit.feature');
-Route::patch('/features/{id}/edit', 'FeatureController@update')->name('update.feature');
-Route::delete('/features/{id}',	    'FeatureController@destroy')->name('delete.feature');
+Route::get('/features', 'FeatureController@index')->name('features.index');
+Route::get('/features/new', 'FeatureController@create')->name('features.create');
+Route::post('/features/new', 'FeatureController@store')->name('features.store');
+Route::get('/features/{id}/show', 'FeatureController@show')->name('features.show');
+Route::get('/features/{id}/edit', 'FeatureController@edit')->name('features.edit');
+Route::patch('/features/{id}/edit', 'FeatureController@update')->name('features.update');
+Route::delete('/features/{id}',	    'FeatureController@destroy')->name('features.destroy');
 
 Route::get('/features/{id}/alleles', 'AlleleController@create')->name('create.allele');
 Route::post('/features/{id}/alleles/new', 'AlleleController@store')->name('store.allele');
@@ -37,11 +37,19 @@ Route::post('/features/{id}/alleles/new', 'AlleleController@store')->name('store
 //--Plants resources--//
 
 
-Route::get('/plants', 'PlantController@index')->name('index.plant');
-Route::get('/plants/new', 'PlantController@create')->name('create.plant');
-Route::post('/plants/new', 'PlantController@store')->name('store.plant');
+Route::get('/plants', 'PlantController@index')->name('plants.index');
+Route::get('/plants/new', 'PlantController@create')->name('plants.create');
+Route::post('/plants/new', 'PlantController@store')->name('plants.store');
 
+Route::get('/plants/{id}/show', 'PlantFeatureController@show')->name('plants.show');
+Route::get('/plants/{id}/edit', 'PlantFeatureController@edit')->name('plants.edit');
+Route::patch('/plants/{id}/edit', 'PlantFeatureController@update')->name('plants.update');
+Route::delete('/plants/{id}',	    'PlantFeatureController@destroy')->name('plants.destroy');
 
 
 Route::get('/plants/{id}/features/new', 'PlantFeatureController@create')->name('create.plantFeature');
 Route::post('/plants/{id}/features/new', 'PlantFeatureController@store')->name('store.plantFeature');
+
+Route::get('/plants/cross_plants', 'CrossPlantController@index')->name('crosPlant.index');
+Route::get('/plants/cross_plant', 'CrossPlantController@create')->name('crosPlant.create');
+Route::post('/plants/cross_plant', 'CrossPlantController@store')->name('crosPlant.store');

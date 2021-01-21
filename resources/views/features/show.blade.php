@@ -1,6 +1,5 @@
 @extends('layouts.admin.app')
 
-
 @section('title', 'Caracteristica')
 @section('content')
 
@@ -14,6 +13,6 @@
   </div>
 </div>
 
-<a href="{{route('index.feature')}}"> Voltar</a>
+<a href="{{route('features.index')}}"> Voltar</a>
 
 @endsection

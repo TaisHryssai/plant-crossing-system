@@ -7,7 +7,7 @@
 @isset($features)
 <div class="table-responsive mt-8">
 	<div class="col-sm-12 mb-2">
-		<a href="{{ route('create.feature') }}" class="btn btn-outline-primary d-block">
+		<a href="{{ route('features.create') }}" class="btn btn-outline-primary d-block">
 			<i class="fas fa-plus"></i>
 			Adicionar Característica
 		</a>
