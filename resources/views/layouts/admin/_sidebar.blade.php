@@ -11,7 +11,12 @@
       </span>
       Página inicial
     </a>
-
+    <a class="list-group-item list-group-item-action" href="{{route('users.index')}}">
+      <span class="icon mr-2">
+        <i class="fas fa-users"></i>
+      </span>
+      Administradores
+    </a>
     <a class="list-group-item list-group-item-action" href="{{route('features.index')}}">
       <span class="icon mr-2">
         <i class="far fa-file-alt"></i>
@@ -27,8 +32,8 @@
     <a class="list-group-item list-group-item-action" href="{{ route('crosPlant.index') }}">
       <span class="icon mr-2">
        <i class="fas fa-plus"></i>
-      </span>
-      Cruzar Planta
-    </a>
-  </div>
+     </span>
+     Cruzar Planta
+   </a>
+ </div>
 </div>

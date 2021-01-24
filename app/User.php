@@ -37,4 +37,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+    /**
+    * @param string $term
+    * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    */
+    public static function search($term)
+    {
+        if ($term) {
+            $searchTerm = "%{$term}%";
+            return User::where('name', 'LIKE', $searchTerm)
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+        }
+        return User::orderBy('created_at', 'desc')->paginate(5);
+    }
 }
