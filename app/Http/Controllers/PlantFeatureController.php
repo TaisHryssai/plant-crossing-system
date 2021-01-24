@@ -12,16 +12,6 @@ use App\Allele;
 class PlantFeatureController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -31,7 +21,9 @@ class PlantFeatureController extends Controller
         $plant = Plant::find($id);  
         $features = Feature::all();
         $alleles = Allele::all();
-        return view('plants.features.new', compact('plant', 'features', 'alleles'));
+        $plantFeature = new PlantFeature();
+
+        return view('plants.features.new', compact('plant', 'features', 'alleles', 'plantFeature'));
     }
 
     /**
@@ -43,33 +35,26 @@ class PlantFeatureController extends Controller
     public function store(Request $request, $id)
     {
         $data = $request->all();
+        $features = Feature::all();
 
         $validator = Validator::make($data, [
-            // 'plant_id'       => 'required',
-            'feature_id'       => 'required',
+            'feature_id' => 'required'
         ]);
 
-        $plant = Plant::find($id);
-        $features = Feature::all();
         $plantFeature = new PlantFeature($data);
+        $plant = Plant::find($id);
+        $plant->fill($data);
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('plants.features.new', compact('plant', 'features'))->withErrors($validator);
+            return view('plants.features.new', compact('plant', 'features', 'plantFeature'))->withErrors($validator);
         }
 
-        foreach ($request->feature_id as $feature) {
-            $datas[] = $feature;
-        }
-
-        $p = json_encode($datas);
-
-        $plantFeature->feature_id = $p;
+        $plantFeature->feature_id = $request->feature_id;
         $plantFeature->plant_id = $plant->id;
 
-        $plant->features()->attach($request->feature_id);
-
-        return redirect()->route('plants.index')->with('success', 'Planta cadastrada com sucesso');
+        $plant->features()->attach($plantFeature->feature_id);
+        return redirect()->route('create.plantFeature', $plant->id)->with('success', 'Planta cadastrada com sucesso');
     }
 
     /**
@@ -81,7 +66,16 @@ class PlantFeatureController extends Controller
     public function show($id)
     {
         $plant = Plant::find($id);
-        return view('plants.show', compact('plant'));
+        $user = Feature::with('alleles')->get();
+        foreach ($user as $organization) {
+            foreach ($organization->alleles as $value) {
+                $alleles ="Alelos da Caracteristica: " . $value->name;
+                // dd($alleles);
+            }
+            // $alleles ="Alelos da Caracteristica: " . $organization->name;
+        }
+
+        return view('plants.show', compact('plant', 'alleles'));
     }
 
     /**
@@ -106,12 +100,23 @@ class PlantFeatureController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $plant = Plant::find($id);
         $plantFeature = PlantFeature::find($id);
+        $features = Feature::all();
         $data = $request->all();
 
         $validator = Validator::make($data, [
             'feature_id'   => 'required',
+            'plant_id'   => 'required',
         ]);
+
+        if ($validator->fails()) {
+            $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
+            return view('plants.edit', compact('plantFeature', 'plant', 'features'))->withErrors($validator);
+        }
+
+        $plantFeature->save();
+        return redirect()->route('plants.index')->with('success', 'Caracteristica atualizada com sucesso');
     }
 
     /**
@@ -122,6 +127,8 @@ class PlantFeatureController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plant = Plant::find($id);
+        $plant->delete();
+        return redirect()->route('plants.index')->with('success', 'Planta removida com sucesso');
     }
 }

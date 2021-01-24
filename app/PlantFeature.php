@@ -14,5 +14,4 @@ class PlantFeature extends Model
     ];
 
     protected $table = 'plant_features';
-
 }

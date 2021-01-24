@@ -22,6 +22,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/features', 'FeatureController@index')->name('features.index');
+Route::get('/features/page/{page}', 'FeatureController@index')->name('features.page');
+Route::get('/features/search/{term}/page/{page}', 'FeatureController@index')->name('features.search.page');
+Route::get('/features/search/{search}', 'FeatureController@index')->name('features.search');
 Route::get('/features/new', 'FeatureController@create')->name('features.create');
 Route::post('/features/new', 'FeatureController@store')->name('features.store');
 Route::get('/features/{id}/show', 'FeatureController@show')->name('features.show');
@@ -35,11 +38,13 @@ Route::post('/features/{id}/alleles/new', 'AlleleController@store')->name('store
 
 
 //--Plants resources--//
-
-
 Route::get('/plants', 'PlantController@index')->name('plants.index');
+Route::get('/plants/page/{page}', 'PlantController@index')->name('plants.page');
+Route::get('/plants/search/{term}/page/{page}', 'PlantController@index')->name('plants.search.page');
+Route::get('/plants/search/{term}', 'PlantController@index')->name('plants.search');
 Route::get('/plants/new', 'PlantController@create')->name('plants.create');
 Route::post('/plants/new', 'PlantController@store')->name('plants.store');
+
 
 Route::get('/plants/{id}/show', 'PlantFeatureController@show')->name('plants.show');
 Route::get('/plants/{id}/edit', 'PlantFeatureController@edit')->name('plants.edit');
@@ -50,6 +55,11 @@ Route::delete('/plants/{id}',	    'PlantFeatureController@destroy')->name('plant
 Route::get('/plants/{id}/features/new', 'PlantFeatureController@create')->name('create.plantFeature');
 Route::post('/plants/{id}/features/new', 'PlantFeatureController@store')->name('store.plantFeature');
 
-Route::get('/plants/cross_plants', 'CrossPlantController@index')->name('crosPlant.index');
-Route::get('/plants/cross_plant', 'CrossPlantController@create')->name('crosPlant.create');
-Route::post('/plants/cross_plant', 'CrossPlantController@store')->name('crosPlant.store');
+Route::get('/cross_plants', 'CrossPlantController@index')->name('crosPlant.index');
+Route::get('/cross_plants/page/{page}', 'FeatureController@index')->name('crosPlant.page');
+Route::get('/cross_plants/search/{term}/page/{page}', 'FeatureController@index')->name('crosPlant.search.page');
+Route::get('/cross_plants/search/{search}', 'FeatureController@index')->name('crosPlant.search');
+
+
+Route::get('/cross_plant', 'CrossPlantController@create')->name('crosPlant.create');
+Route::post('/cross_plant', 'CrossPlantController@store')->name('crosPlant.store');

@@ -4,15 +4,13 @@
 
 @section('content')
 
-<div class="table-responsive mt-8">
-	<div class="col-sm-12 mb-2">
-	</div>	<div class="col-sm-12 mb-2">
-		<a href="{{ route('crosPlant.create') }}" class="btn btn-outline-primary d-block">
-			<i class="fas fa-plus"></i>
-			Cruzar Planta
-		</a>
-	</div>
+@component('components.index.header', ['base_search_path' => route('crosPlant.index'),
+                                       'new_url' => route('crosPlant.create'),
+                                       'new_btn_name' => 'Cruzar Plantas']) @endcomponent
 
+<div class="table-responsive mt-3">
+@component('components.index.page_entries_info', ['entries' => $plants]) @endcomponent
+<div class="table-responsive mt-8">
 	<table class="table card-table table-striped table-vcenter table-data">
 		<thead>
 			<tr>
@@ -25,6 +23,8 @@
 		<tbody>
 		</tbody>
 	</table>
-
+	<div class="mt-5 float-right flex-wrap">
+		{!! $plants !!}
+	</div>
 </div>
 @endsection

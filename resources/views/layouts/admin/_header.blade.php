@@ -1,6 +1,9 @@
 <div class="fixed-top header py-1">
   <div class="container-fluid">
     <div class="d-flex">
+      <a class="header-brand mr-0" href="./index.html">
+        <img src="{{ asset('assets/images/icon-plant.png') }}" class="header-brand-img" alt="tabler logo">
+      </a>
       <span class="d-lg-block mt-1 text-muted font-weight-bold mt-3">
         TESTE TEOREMA
       </span>
@@ -8,9 +11,9 @@
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
 
-            <span class="avatar" style="background-image: url('../assets/images/default/default-user.png')"></span>
             
             <span class="ml-2 d-none d-lg-block">
+            <span class="avatar avatar-sm mr-2" style="background-image: url('../assets/images/default/default-user.png')"></span>
               <span class="text-default">  {{ Auth::user()->name }}</span>
               <small class="text-muted d-block mt-1">  {{ Auth::user()->email }}</small>
             </span>

@@ -4,13 +4,13 @@
 
 @section('content')
 
-<form action="{{ route('crosPlant.store') }}" method="POST" novalidate>
+<form action="" method="POST" novalidate>
 	@csrf
 
-	@component('components.form.input_select',['field' => 'feature_id',
+	@component('components.form.input_select',['field' => 'plant_id',
 	'label'    => 'Cruzar planta',
 	'model'    => 'crossPlant',
-	'value'    => '',
+	'value'    => $crossPlant->plant_id,
 	'options'  => $plants,
 	'default' => 'Selecione uma planta:',
 	'value_method' => 'id',
@@ -18,10 +18,10 @@
 	'required' => true,
 	'errors'   => $errors]) @endcomponent
 
-	@component('components.form.input_select',['field' => 'feature_id',
+	@component('components.form.input_select',['field' => 'plant_id',
 	'label'    => 'Cruzar planta',
 	'model'    => 'crossPlant',
-	'value'    => '',
+	'value'    => $crossPlant->plant_id,
 	'options'  => $plants,
 	'default' => 'Selecione uma planta:',
 	'value_method' => 'id',
@@ -29,7 +29,7 @@
 	'required' => true,
 	'errors'   => $errors]) @endcomponent
 
-	@component('components.form.input_submit', ['value' => 'Enviar', 'back_url' => route('plants.index')]) @endcomponent
+	@component('components.form.input_submit', ['value' => 'Enviar', 'back_url' => route('crosPlant.index')]) @endcomponent
 </form>
 
 @endsection

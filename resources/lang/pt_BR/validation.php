@@ -181,6 +181,8 @@ return [
         'year'      => 'ano',
         'description' => 'descrição',
         'password_confirmation' => 'confirmação da senha',
+        'feature_id' => 'caracteristica',
+        'value' => 'valor',
     ],
 
 ];

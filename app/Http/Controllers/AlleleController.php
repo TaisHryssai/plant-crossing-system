@@ -10,25 +10,15 @@ use Illuminate\Support\Facades\Validator;
 class AlleleController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create($id)
     {
-        $features = Feature::find($id);
+        $feature = Feature::find($id);
         $allele = new Allele();
-        return view('features.alleles.new', compact('allele', 'features'));
+        return view('features.alleles.new', compact('allele', 'feature'));
     }
 
     /**
@@ -52,7 +42,7 @@ class AlleleController extends Controller
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('features.new', compact('allele'))->withErrors($validator);
+            return view('features..alleles.new', compact('allele', 'feature'))->withErrors($validator);
         }
 
         $feature->alleles()->save($allele);

@@ -4,19 +4,18 @@
 
 @section('content')
 
-<div class="table-responsive mt-2">
-	<div class="col-sm-12 mb-5">
-		<a href="{{ route('plants.create') }}" class="btn btn-outline-primary d-block">
-			<i class="fas fa-plus"></i>
-			Adicionar Planta
-		</a>
-	</div>
+@component('components.index.header', ['base_search_path' => route('plants.index'),
+                                       'new_url' => route('plants.create'),
+                                       'new_btn_name' => 'Nova Planta']) @endcomponent
 
+<div class="table-responsive mt-3">
+@component('components.index.page_entries_info', ['entries' => $plantFeature]) @endcomponent
+<div class="table-responsive mt-2">
 	<table class="table card-table table-striped table-vcenter table-data">
 		<thead>
 			<tr>
+				<th>Planta</th>
 				<th>Nome da Planta</th>
-				<th>Caracteristicas</th>
 				<th>Criado em</th>
 				<th></th>
 			</tr>
@@ -25,6 +24,9 @@
 			@each('plants._plant_row', $plantFeature, 'plant')
 		</tbody>
 	</table>
-
+  <div class="mt-5 float-right flex-wrap">
+    {!! $plantFeature !!}
+  </div>
+</div>
 </div>
 @endsection

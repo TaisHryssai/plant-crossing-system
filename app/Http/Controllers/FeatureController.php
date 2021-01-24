@@ -16,8 +16,9 @@ class FeatureController extends Controller
      */
     public function index()
     {
-        $features = Feature::all();
-        return view('features.index', compact('features'));
+        $search = Request()->term;
+        $features = Feature::search($search);
+        return view('features.index')->with('features', $features);
     }
 
     /**
@@ -93,7 +94,6 @@ class FeatureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $feature = Feature::find($id);
         $allele = Allele::find($id);
 
         $data = $request->all();
@@ -106,11 +106,11 @@ class FeatureController extends Controller
 
          if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('admin.edicts.edit', compact('allele'))->withErrors($validator);
+            return view('featuresfe.edit', compact('allele'))->withErrors($validator);
         }
 
         $allele->save();
-        return redirect()->route('index.feature')->with('success', 'Caracteristica atualizada com sucesso');
+        return redirect()->route('features.index')->with('success', 'Caracteristica atualizada com sucesso');
     }
 
     /**
@@ -123,6 +123,6 @@ class FeatureController extends Controller
     {
         $feature = Feature::find($id);
         $feature->delete();
-        return redirect()->route('index.feature')->with('success', 'Caracteristica removida com sucesso');
+        return redirect()->route('features.index')->with('success', 'Caracteristica removida com sucesso');
     }
 }

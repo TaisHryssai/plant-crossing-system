@@ -17,8 +17,9 @@ class PlantController extends Controller
      */
     public function index()
     {
-        $plantFeature = Plant::all();
-        return view('plants.index', compact('plantFeature'));
+        $search = Request()->term;
+        $plantFeature = Plant::search($search);
+        return view('plants.index')->with('plantFeature', $plantFeature);
     }
 
     /**
@@ -43,7 +44,8 @@ class PlantController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'name'       => 'required',
+            'name'    => 'required',
+            'image'   => 'required'
         ]);
 
         $plant = new Plant($data);

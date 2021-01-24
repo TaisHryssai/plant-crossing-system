@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Plant;
 use App\Feature;
 use Illuminate\Support\Facades\Validator;
+use App\CrossPlant;
 
 class CrossPlantController extends Controller
 {
@@ -16,8 +17,9 @@ class CrossPlantController extends Controller
      */
     public function index()
     {
-        $plants = Feature::all();
-        return view('cross_plant.index', compact('plants'));
+        $search = Request()->term;
+        $plants = Feature::search($search);
+        return view('cross_plant.index')->with('plants', $plants);
     }
 
     /**
@@ -28,7 +30,8 @@ class CrossPlantController extends Controller
     public function create()
     {
         $plants = Plant::all();
-        return view('cross_plant.new', compact('plants'));
+        $crossPlant = new CrossPlant();
+        return view('cross_plant.new', compact('plants', 'crossPlant'));
     }
 
     /**
@@ -45,11 +48,11 @@ class CrossPlantController extends Controller
             'feature_id' => 'required',
         ]);
 
-        $plant = new Feature($data);
+        $crossPlant = new CrossPlant($data);
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('features.new', compact('plant'))->withErrors($validator);
+            return view('features.new', compact('crossPlant'))->withErrors($validator);
         }
 
         $plant->save();

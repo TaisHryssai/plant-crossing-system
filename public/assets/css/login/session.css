@@ -8,5 +8,11 @@
 
 body {
   background-color: #E4E6E5;
+  background-image: url(/images/plant.png?9b60dcfee574d398e524dc54584c76c2);
+}
+
+.login {
+  background-color: #044F1E;
+  opacity: 0.8;
 }
 
